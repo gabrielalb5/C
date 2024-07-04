@@ -15,20 +15,21 @@ void main(void){
     
     srand((unsigned)time(NULL));
 
-    numero = rand() %100;
-    printf("%d\n",numero);
-    
-    printf("Digite um número (até %d): ",max);
+    numero = rand() % max;
+     printf("Adivinhe um número com dicas. Quanto mais quente, mais perto.\n");
+    printf("Digite um número (até %d): ", max);
     scanf("%d",&palpite);
 
     do{
-        if((palpite==(numero-1)) || (palpite==(numero+1))){
+        if(abs(numero-palpite)<=5){
             printf("Pegando fogo!\n");
-        }else if((palpite(numero+5)) || (palpite(numero-5))){
+        }else if(abs(numero-palpite)<=10){
             printf("Quente\n");
-        }else if((palpite<=(numero/2)) || (palpite>=(numero*2))){
+        }else if(abs(numero-palpite)<=20){
+            printf("Morno\n");
+        }else if(abs(numero-palpite)<=30){
             printf("Frio\n");
-        }else if((palpite<=(numero/3)) || (palpite>=(numero*3))){
+        }else{
             printf("Congelante\n");
         }
 
