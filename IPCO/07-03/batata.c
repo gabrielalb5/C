@@ -11,32 +11,45 @@
 void main(void){
     int numero;
     int palpite;
+    int diferenca;
     int max=100;
     
     srand((unsigned)time(NULL));
 
     numero = rand() % max;
-     printf("Adivinhe um número com dicas. Quanto mais quente, mais perto.\n");
+    
+    printf("Adivinhe um número com dicas. Quanto mais quente, mais perto.\n");
     printf("Digite um número (até %d): ", max);
     scanf("%d",&palpite);
-
-    do{
-        if(abs(numero-palpite)<=5){
-            printf("Pegando fogo!\n");
-        }else if(abs(numero-palpite)<=10){
-            printf("Quente\n");
-        }else if(abs(numero-palpite)<=20){
-            printf("Morno\n");
-        }else if(abs(numero-palpite)<=30){
-            printf("Frio\n");
+    
+    if(numero-palpite<0){
+        diferenca = -(numero-palpite);
+    }else{
+        diferenca = numero-palpite;
+    }
+    
+    while(palpite!=numero){
+        if(diferenca<=5){
+            printf("Pegando fogo!");
+        }else if(diferenca<=10){
+            printf("Quente");
+        }else if(diferenca<=20){
+            printf("Morno");
+        }else if(diferenca<=30){
+            printf("Frio");
         }else{
-            printf("Congelante\n");
+            printf("Congelante");
         }
-
-        printf("\nDigite um número (até %d): ",max);
+        
+        printf("\nAdivinhe um número com dicas. Quanto mais quente, mais perto.\n");
+        printf("Digite um número (até %d): ", max);
         scanf("%d",&palpite);
-    }while(palpite!=numero);
-
-    printf("\nACERTOU!\n");
-    printf("O número é %d", numero);
+        
+        if(numero-palpite<0){
+            diferenca = -(numero-palpite);
+        }else{
+            diferenca = numero-palpite;
+        }
+    }
+    printf("Acertou, o número é %d",numero);
 }
