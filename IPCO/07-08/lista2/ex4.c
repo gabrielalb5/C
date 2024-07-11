@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define TAM 7
 
+// Function prototypes
 void lerVetor(int vetor[], int num, int pos);
 void incluir(int vetor[], int num, int pos);
 void imprimir(int vetor[]);
@@ -23,9 +24,9 @@ void lerVetor(int vetor[], int num, int pos){
         scanf("%d", &vetor[i]);
     }
 
-    printf("Numero para substituir: ");
+    printf("Numero para incluir: ");
     scanf("%d",&num);
-    printf("Posição para substituir: ");
+    printf("Posição para incluir: ");
     scanf("%d",&pos);
 }
 
