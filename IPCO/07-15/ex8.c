@@ -28,12 +28,13 @@ void substituir(char texto[TAM], char l1[1], char l2[1]){
     int i;
     for(i=0;i<TAM;i++){
         if(texto[i]==l1[0]){
-            texto[i]==l2[0];
+            texto[i]=l2[0];
         }
     }
     printf("%c",l1[0]);
     printf("%c",l2[0]);
 }
+
 void imprimir(char texto[TAM]){
     printf("Palavra: %s",texto);
 }
