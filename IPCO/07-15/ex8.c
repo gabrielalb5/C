@@ -17,6 +17,7 @@ int main(){
     substituir(texto,l1,l2);
     imprimir(texto);
 
+    return 0;
 }
 
 void lerVetor(char texto[TAM]){
