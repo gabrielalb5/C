@@ -1,21 +1,23 @@
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
+#include <string.h> //Biblioteca de strings
+#include <ctype.h> //Biblioteca para conversão de maiusculas e minusculas
 #define TAM 10
 
-void validaResp(int i, char respostas[i]);
+void validaResp(int i, char respostas[i]); //Função responsável por validar a opção digitada na resposta
 
 int main(){
 
-    int i=0, corretas=0;
-    char nome[255], indicador[TAM], respostas[TAM], gabarito[TAM] = "ACCABBAACB";
+    int i=0, corretas=0; //contador de corretas e i padrão
+    char nome[255], indicador[TAM], respostas[TAM], gabarito[TAM] = "ACCABBAACB"; //vetores de nome, indicador (erro X acerto O), respostas digitadas pelo usuario e o gabarito definido
 
     printf("--------------------------------- QUIZ DE LINGUAGEM C ---------------------------------\n");
     printf("10 perguntas serão exibidas e você deverá digitar uma alternativa para cada. Boa sorte!\n\n");
 
     printf("Para iniciar, digite seu nome: ");
-    scanf("%s",nome);
+    scanf(" %s",nome);
 
+    //Início das questões com um padrão de pergunta, leitura da alternativa, validação com a função
+    //aumento do i para que a posição do vetor de resposta esteja correta
     printf("\n\nQuestão 1 - Como é declarada uma estrutura condicional em linguagem C?\n\n");
     printf("A) if(condição){\n    ...\n   }else{\n    ...\n   }\n");
     printf("B) se(condição)entao\n    ...\n   senao\n    ...\n   }\n");
@@ -107,7 +109,9 @@ int main(){
     i++;
 
     for(i=0;i<10;i++){
+        //Conversão do vetor de respostas todo para letras maiúsculas
         respostas[i] = toupper(respostas[i]);
+        //Comparação de vetor gabarito e respostas para armazenar corretas e indicador
         if(respostas[i]==gabarito[i]){
             corretas++;
             indicador[i] = 'O';
@@ -115,6 +119,8 @@ int main(){
             indicador[i] = 'X';
         }
     }
+
+    //Mensagem final exibindo o gabarito, as respostas do usuário, o indicador e a questão referente
     printf("\n%s, você acertou %d de %d questões (%d%%)\n",nome,corretas,TAM,(corretas*(100/TAM)));
         printf("GABARITO | SUAS RESPOSTAS | INDICADOR | QUESTÃO \n");
     for(i=0;i<10;i++){
@@ -124,7 +130,9 @@ int main(){
     return 0;
 }
 
+//Função de validação das respostas
 void validaResp(int i, char respostas[]){
+    //Enquanto as opções forem diferentes das alternativas (a,b,c tanto minúsculas quanto maiúsculas) pedir para redigitar a alternativa
     while(respostas[i]!='a' && respostas[i]!='A' && respostas[i]!='b' && respostas[i]!='B' && respostas[i]!='c' && respostas[i]!='C'){
         printf("Alternativa inválida. Digite novamente: ");
         scanf(" %c",&respostas[i]);
