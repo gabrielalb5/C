@@ -13,7 +13,7 @@ void disp_matrix(void);
 int main(void){
   char done;
   printf("Jogo da velha.\n");
-  printf("Voce jogara contra o computador.\n");
+  printf("Você jogará contra o computador.\n");
   done = ' ';
   init_matrix();
   do {
@@ -44,7 +44,7 @@ void get_player_move(void)
 {
   int x, y;
 
-  printf("Entre com as coordenadas para o X: ");
+  printf("Entre com as coordenadas para o X (linha coluna): ");
   scanf("%d%d", &x, &y);
   x--; y--;
   if(matrix[x][y]!=' ') {
@@ -67,9 +67,39 @@ void get_computer_move(void)
   if(i*j==9) {
     printf("empate\n");
     exit(0);
-  }
-  else
+  //Começar colocando um O no meio
+  }else if((matrix[0][0]=='X' || matrix[0][2]=='X' || matrix[2][0]=='X' || matrix[2][2]=='X') && matrix[1][1]==' '){
+    matrix[1][1] = 'O';
+  //Tentativa de vencer pelos cantos ou bloquear um canto
+  }else if(((matrix[0][0]=='X' && matrix[0][1]=='X')||(matrix[1][2]=='X' && matrix[2][2]=='X')) && matrix[0][2]==' '){
+    matrix[0][2] = 'O';
+  }else if(((matrix[0][2]=='X' && matrix[1][2]=='X')||(matrix[2][0]=='X' && matrix[2][1]=='X')) && matrix[2][2]==' '){
+    matrix[2][2] = 'O';
+  }else if(((matrix[0][0]=='X' && matrix[1][0]=='X')||(matrix[2][1]=='X' && matrix[2][2]=='X')) && matrix[2][0]==' '){
+    matrix[2][0] = 'O';
+  }else if(((matrix[1][0]=='X' && matrix[2][0]=='X')||(matrix[0][1]=='X' && matrix[0][2]=='X')) && matrix[0][0]==' '){
+    matrix[0][0] = 'O';
+  //Tentativa de vencer pelas diagonais ou bloquear uma diagonal
+  }else if(((matrix[1][1]=='O' && matrix[0][2]=='O')||(matrix[1][1]=='X' && matrix[0][2]=='X')) && matrix[2][0]==' '){
+    matrix[2][0] = 'O';
+  }else if(((matrix[1][1]=='O' && matrix[2][0]=='O')||(matrix[1][1]=='X' && matrix[2][0]=='X')) && matrix[0][2]==' '){
+    matrix[0][2] = 'O';
+  }else if(((matrix[1][1]=='O' && matrix[0][0]=='O')||(matrix[1][1]=='X' && matrix[0][0]=='X')) && matrix[2][2]==' '){
+    matrix[2][2] = 'O';
+  }else if(((matrix[1][1]=='O' && matrix[2][2]=='O')||(matrix[1][1]=='X' && matrix[2][2]=='X')) && matrix[0][0]==' '){
+    matrix[0][0] = 'O';
+  //Tentativa de vencer pelas bordas ou bloquear uma borda
+  }else if(((matrix[1][1]=='O' && matrix[0][1]=='O')||(matrix[2][0]=='O' && matrix[2][2]=='O')||(matrix[1][1]=='X' && matrix[0][1]=='X')||(matrix[2][0]=='X' && matrix[2][2]=='X')) && matrix[2][1]==' '){
+    matrix[2][1] = 'O';
+  }else if(((matrix[1][1]=='O' && matrix[1][2]=='O')||(matrix[0][0]=='O' && matrix[2][0]=='O')||(matrix[1][1]=='X' && matrix[1][2]=='X')||(matrix[0][0]=='X' && matrix[2][0]=='X')) && matrix[1][0]==' '){
+    matrix[1][0] = 'O';
+  }else if(((matrix[1][1]=='O' && matrix[2][1]=='O')||(matrix[0][0]=='O' && matrix[0][2]=='O')||(matrix[1][1]=='X' && matrix[2][1]=='X')||(matrix[0][0]=='X' && matrix[0][2]=='X')) && matrix[0][1]==' '){
+    matrix[0][1] = 'O';
+  }else if(((matrix[1][1]=='O' && matrix[1][0]=='O')||(matrix[0][2]=='O' && matrix[2][2]=='O')||(matrix[1][1]=='X' && matrix[1][0]=='X')||(matrix[0][2]=='X' && matrix[2][2]=='X')) && matrix[1][2]==' '){
+    matrix[1][2] = 'O';
+  }else{
     matrix[i][j] = 'O';
+  }
 }
 
 /* Mostra a matriz na tela */
