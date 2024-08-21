@@ -106,7 +106,7 @@ void consulta_codigo(Livro livros[], int qtdLivros){
         }
     }
     if(cont==0){
-        printf("\nNenhum resultado encontrado");
+        printf("\nNenhum resultado encontrado\n");
     }
 }
 void consulta_titulo(Livro livros[], int qtdLivros){
@@ -121,7 +121,7 @@ void consulta_titulo(Livro livros[], int qtdLivros){
         }
     }
     if(cont==0){
-        printf("\nNenhum resultado encontrado");
+        printf("\nNenhum resultado encontrado\n");
     }
 }
 void consulta_preco(Livro livros[], int qtdLivros){
@@ -136,7 +136,7 @@ void consulta_preco(Livro livros[], int qtdLivros){
         }
     }
     if(cont==0){
-        printf("\nNenhum resultado encontrado");
+        printf("\nNenhum resultado encontrado\n");
     }
 }
 void consulta_qtd(Livro livros[], int qtdLivros){
@@ -153,8 +153,13 @@ void consulta_qtd(Livro livros[], int qtdLivros){
     printf("\nO autor pesquisado tem %d livros cadastrados\n",cont);
 }
 void consulta_acervo(Livro livros[], int qtdLivros){
+    int cont=0;
     printf("\nTODOS OS LIVROS CADASTRADOS\n");
     for(int i=0;i<qtdLivros;i++){
         printf("ID: %d | %s (%s - %d), Editora: %s - R$%.2f\n",livros[i].codigo,livros[i].titulo,livros[i].autor,livros[i].ano,livros[i].editora,livros[i].preco);
+        cont++;
+    }
+    if(cont==0){
+        printf("\nNenhum resultado encontrado\n");
     }
 }
