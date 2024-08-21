@@ -12,6 +12,7 @@ código.*/
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define MAX_CONTA 10
 
 //armazenar os dados de uma conta
@@ -132,7 +133,7 @@ void saque(Conta contas[], int qteContas){
 }
 void consulta(Conta contas[], int qteContas){
     int opcao, num_conta;
-    char nome;
+    char nome[30];
     do{
         printf("\nCONSULTA");
         printf("\n1. Pelo número da conta");
@@ -148,16 +149,16 @@ void consulta(Conta contas[], int qteContas){
         scanf("%d",&num_conta);
         for(int i=0;i<qteContas;i++){
             if(contas[i].numero==num_conta){
-                printf("Seu saldo é de R$%.2f\n",contas[i].numero);
+                printf("Seu saldo é de R$%.2f\n",contas[i].saldo);
             }
         }
     }else if(opcao==2){
         printf("\nQual o seu nome? ");
         scanf("%s",nome);
+        printf("Saldo das suas contas\n");
         for(int i=0;i<qteContas;i++){
-            printf("Saldo das suas contas\n");
-            if(contas[i].nome==nome){
-                printf("R$%.2f\n",contas[i].numero);
+            if(strcmp(contas[i].nome, nome) == 0){
+                printf("R$%.2f\n",contas[i].saldo);
             }
         }
     }
