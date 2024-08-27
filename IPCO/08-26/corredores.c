@@ -54,7 +54,7 @@ int main(){
                     break;
             case 8: printf("Saindo do programa.");
                     break;
-            default: printf("Opção inválida");
+            default: printf("Opção inválida.\n");
                     break;
         }
     }while(opcao!=8);
@@ -152,18 +152,51 @@ void consultar_nome(Corredor corredores[], int qtd_corredores){
 void classificacao(Corredor corredores[], int qtd_corredores){
     printf("\nCLASSIFICAÇÃO\n");
 
-    if(qtd_corredores==0){
+    if (qtd_corredores == 0) {
         printf("Não há corredores cadastrados!\n");
         return;
     }
+
+    for (int i = 0; i < qtd_corredores - 1; i++) {
+        for (int j = i + 1; j < qtd_corredores; j++) {
+            if (corredores[j].tempo < corredores[i].tempo) {
+                Corredor temp = corredores[i];
+                corredores[i] = corredores[j];
+                corredores[j] = temp;
+            }
+        }
+    }
+
+    for (int i = 0; i < qtd_corredores; i++) {
+        printf("%d° lugar - ", i + 1);
+        printf("ID %d | %s, %d anos", corredores[i].num_peito, corredores[i].nome, corredores[i].idade);
+        if (corredores[i].sexo == 1) {
+            printf(" (M) ");
+        } else {
+            printf(" (F) ");
+        }
+        printf("- Tempo: %.2f min\n", corredores[i].tempo);
+    }
 }
 void media_geral(Corredor corredores[], int qtd_corredores){
+    float soma=0;
     printf("\nMÉDIA DE TEMPO DE TODOS OS CORREDORES\n");
 
     if(qtd_corredores==0){
         printf("Não há corredores cadastrados!\n");
         return;
     }
+    for(int i=0;i<qtd_corredores;i++){
+        printf("ID %d | %s, %d anos",corredores[i].num_peito, corredores[i].nome,corredores[i].idade);
+            if(corredores[i].sexo==1){
+                printf(" (M) ");
+            }else{
+                printf(" (F) ");
+            }
+        printf("- Tempo: %.2f min\n",corredores[i].tempo);
+        soma += corredores[i].tempo;
+    }
+    printf("\nMédia de tempo geral: %.2f min\n",soma/qtd_corredores);
 }
 void media_60(Corredor corredores[], int qtd_corredores){
     float soma=0;
@@ -187,14 +220,36 @@ void media_60(Corredor corredores[], int qtd_corredores){
             cont++;
         }
     }
-    printf("\nQuantidade de corredores com mais de 60 anos: %d\n",cont);
-    printf("Média de tempo: %.2f min\n",soma/cont);
+    if(cont>0){
+        printf("\nQuantidade de corredores com mais de 60 anos: %d\n",cont);
+        printf("Média de tempo: %.2f min\n",soma/cont);
+    }else{
+        printf("\nNão há corredores com mais de 60 anos.\n");
+    }
+    
 }
 void mulheres(Corredor corredores[], int qtd_corredores){
+    float soma=0;
+    int cont=0, idades=0;
     printf("\nCORREDORAS (SEXO FEMININO)\n");
 
     if(qtd_corredores==0){
         printf("Não há corredores cadastrados!\n");
         return;
+    }
+    for(int i=0;i<qtd_corredores;i++){
+        if(corredores[i].sexo==0){
+            printf("ID %d | %s, %d anos (F) - Tempo: %.2f min\n",corredores[i].num_peito, corredores[i].nome,corredores[i].idade,corredores[i].tempo);
+            soma += corredores[i].tempo;
+            idades += corredores[i].idade;
+            cont++;
+        }
+    }
+    if(cont>0){
+        printf("\nQuantidade de corredoras: %d\n",cont);
+        printf("Média de idade: %.2f\n",idades/cont);
+        printf("Média de tempo: %.2f min\n",soma/cont);
+    }else{
+        printf("\nNão há mulheres cadastradas.\n");
     }
 }
