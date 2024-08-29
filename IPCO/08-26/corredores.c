@@ -11,6 +11,7 @@ typedef struct{
     float tempo;
 }Corredor;
 
+void menu();
 void cadastrar(Corredor corredores[], int qtd_corredores);
 void consultar_num_peito(Corredor corredores[], int qtd_corredores);
 void consultar_nome(Corredor corredores[], int qtd_corredores);
@@ -24,16 +25,7 @@ int main(){
     Corredor corredores[MAX];
 
     do{
-        printf("\nMENU\n");
-        printf("1) Cadastrar corredor(a)\n");
-        printf("2) Consultar os dados de corredor(a) pelo número do peito\n");
-        printf("3) Consultar os dados do corredor(a) pelo nome\n");
-        printf("4) Gerar relatório de classificação\n");
-        printf("5) Calcular a média do tempo de prova entre todos os corredores e corredoras\n");
-        printf("6) Apresentar a quantidade de corredores(as) acima dos 60 anos e a média do tempo de prova deles(as)\n");
-        printf("7) Apresentar a quantidade de mulheres e a média de idade delas\n");
-        printf("8) Sair\n");
-        printf("\nEcolha uma opção: ");
+        menu();
         scanf("%d",&opcao);
 
         switch (opcao){
@@ -58,6 +50,19 @@ int main(){
                     break;
         }
     }while(opcao!=8);
+}
+
+void menu(){
+    printf("\nMENU\n");
+    printf("1) Cadastrar corredor(a)\n");
+    printf("2) Consultar os dados de corredor(a) pelo número do peito\n");
+    printf("3) Consultar os dados do corredor(a) pelo nome\n");
+    printf("4) Gerar relatório de classificação\n");
+    printf("5) Calcular a média do tempo de prova entre todos os corredores e corredoras\n");
+    printf("6) Apresentar a quantidade de corredores(as) acima dos 60 anos e a média do tempo de prova deles(as)\n");
+    printf("7) Apresentar a quantidade de mulheres e a média de idade delas\n");
+    printf("8) Sair\n");
+    printf("\nEcolha uma opção: ");
 }
 
 void cadastrar(Corredor corredores[], int qtd_corredores){
