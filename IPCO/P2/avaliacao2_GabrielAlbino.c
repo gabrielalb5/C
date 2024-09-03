@@ -20,7 +20,7 @@ void buscaCPF(Agenda agenda);
 Agenda adicionarPessoa(Pessoa pessoa, Agenda agenda);
 void listarPessoas(Agenda agenda);
 void buscaNome(Agenda agenda, char pesquisa[255]);
-void removerPessoa(Agenda agenda, char pesquisa[255]);
+Agenda removerPessoa(Agenda agenda, char pesquisa[255]);
 
 int main(){
     Pessoa pessoa;
@@ -37,10 +37,10 @@ int main(){
         printf("\n2 - Buscar pelo CPF");
         printf("\n3 - Listar pessoas");
         printf("\n4 - Buscar pelo nome");
-        printf("\n5 - Remover pessoa");
+        printf("\n5 - Remover cadastro");
         printf("\n0 - Sair");
         printf("\n\nDigite uma opção: ");
-        scanf("%d",&opcao);
+        scanf(" %d",&opcao);
 
         switch(opcao){
             case 0: printf("\nSaindo...");
@@ -50,7 +50,7 @@ int main(){
                     }else{
                         printf("\nADICIONAR PESSOA\n");
                         printf("Digite o cpf: ");
-                        scanf("%d",&cpf);
+                        scanf(" %d",&cpf);
                         printf("Digite o nome: ");
                         scanf(" %[^\n]s",nome);
                         printf("Digite a naturalidade: ");
@@ -68,10 +68,10 @@ int main(){
                     scanf(" %[^\n]s",pesquisa);
                     buscaNome(agenda, pesquisa);
                     break;
-            case 5: printf("\nREMOVER PESSOA\n");
-                    printf("Digite o nome: ");
+            case 5: printf("\nREMOVER CADASTRO\n");
+                    printf("Digite o nome exato do cadastro que deseja remover: ");
                     scanf(" %[^\n]s",pesquisa);
-                    removerPessoa(agenda, pesquisa);
+                    agenda = removerPessoa(agenda, pesquisa);
                     break;
             default: printf("\nOpção inválida\n");
                      break;
@@ -100,7 +100,7 @@ void buscaCPF(Agenda agenda){
     Pessoa pessoa;
     printf("\nBUSCA POR CPF\n");
     printf("Digite o CPF: ");
-    scanf("%d",&pesquisa);
+    scanf(" %d",&pesquisa);
     for(int i=0;i<agenda.qtd_pessoas;i++){
         if(agenda.pessoas[i].cpf == pesquisa){
             pessoa = agenda.pessoas[i];
@@ -115,22 +115,16 @@ void buscaCPF(Agenda agenda){
     }
 }
 
-Agenda adicionarPessoa(Pessoa pessoa, Agenda agenda){
-    if(agenda.qtd_pessoas == 0){
-        agenda.pessoas[agenda.qtd_pessoas] = pessoa;
-        agenda.qtd_pessoas++;
-        return agenda;
-    }else{
-        for(int i=0;i<agenda.qtd_pessoas;i++){
-            if(agenda.pessoas[i].cpf == pessoa.cpf){
-                printf("\nCPF já cadastrado!\n");
-            }else{
-                agenda.pessoas[agenda.qtd_pessoas] = pessoa;
-                agenda.qtd_pessoas++;
-                return agenda;
-            }
+Agenda adicionarPessoa(Pessoa pessoa, Agenda agenda) {
+    for (int i=0;i<agenda.qtd_pessoas;i++) {
+        if (agenda.pessoas[i].cpf == pessoa.cpf) {
+            printf("\nCPF já cadastrado!\n");
+            return agenda;
         }
     }
+    agenda.pessoas[agenda.qtd_pessoas] = pessoa;
+    agenda.qtd_pessoas++;
+    return agenda;
 }
 
 void listarPessoas(Agenda agenda){
@@ -166,6 +160,23 @@ void buscaNome(Agenda agenda, char pesquisa[255]){
     }
 }
 
-void removerPessoa(Agenda agenda, char pesquisa[255]){
-    
+Agenda removerPessoa(Agenda agenda, char pesquisa[255]){
+    int posicao=-1;
+    for(int i=0;i<agenda.qtd_pessoas;i++){
+        if(strcmp(agenda.pessoas[i].nome,pesquisa) == 0){
+            posicao = i;
+            break;
+        }
+    }
+
+    if(posicao==-1){
+        printf("\nNome não encontrado!\n");
+    }else{
+        for(int i=posicao;i<agenda.qtd_pessoas-1;i++){
+        agenda.pessoas[i] = agenda.pessoas[i+1];
+        }
+        agenda.qtd_pessoas--;
+        printf("\nRemoção de %s realizada com sucesso\n",pesquisa);
+    }
+    return agenda;
 }
